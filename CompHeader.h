@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -19,12 +20,24 @@ struct COMP{
 	double ClockSpeed;
 	double RAM;
 	double Storage;
+	
+	/* overloads*/
+	friend std::istream& operator>>(std::istream&, COMP&);
+	friend std::ostream& operator<<(std::ostream&, COMP);
+	friend std::ifstream& operator>>(std::ifstream&, COMP&);
+	friend std::ofstream& operator<<(std::ofstream&, COMP);
 };
 
 struct RECORD{
 	COMP CompInfo;
 	double CompCost;
 	int CompInStock;
+	
+	/* overloads*/
+	friend std::istream& operator>>(std::istream&, RECORD&);
+	friend std::ostream& operator<<(std::ostream&, RECORD);
+	friend std::ifstream& operator>>(std::ifstream&, RECORD&);
+	friend std::ofstream& operator<<(std::ofstream&, RECORD);
 };
 
 struct BrandPerech{
@@ -48,10 +61,14 @@ class workComputers {
 		workComputers(int size = 0) : size(size), CapabilitiesComp(size ? new RECORD[size] : nullptr) {}
 		~workComputers() { delete [] CapabilitiesComp; }
 		workComputers(const workComputers&);
-		workComputers& operator=(workComputers);
-		friend void swap(workComputers&, workComputers&);
 
+		/* overloads*/
+		workComputers& operator=(workComputers);
+//		friend std::istream& operator>>(std::istream&, workComputers);
+//		friend std::ostream& operator<<(std::ostream&, workComputers);
+		
 		/* METHODS*/
+		friend void swap(workComputers&, workComputers&);
 		virtual void testCopyOperator();
 		virtual void testCopyConstructor();
 
@@ -93,7 +110,7 @@ class SearchComp : public workComputers{
 		virtual void OutputInFile();
 		virtual void SortProcTypeAndClock();
 		virtual void showInfo();
-	//	virtual void swapElementsInMassive(unsigned);
+		void swapElementsInSearch(unsigned);
 	private:
 		int size;
 		RECORD* SearchResult;

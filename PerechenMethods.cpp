@@ -74,7 +74,6 @@ void Perechen::showFirstPerech(){
 		"|     Название процессора     | Количество компьютеров |\n" << 
 		std::setw(57) << '\n';
 	std::cout << std::setfill(' ');
-//	std::cout << pBrandlen << '\n';
 	for (int i = 0; i < pBrandlen; i++)
 		std::cout << '|' << std::setw(29) << perechenBrands[i].ProcName << '|' << std::setw(24) << perechenBrands[i].Count << "|\n";
 	std::cout << '\n';
@@ -108,7 +107,7 @@ void swapElementsInPerechen(int index, PerechenTemplate CL){
 }*/
 
 void Perechen::sortProcTypeFirstPerech(){
-//	std::cout << "Сортировака перечня по названию процессора \n";
+//	std::cout << "Сортировка перечня по названию процессора \n";
 	int n = pBrandlen;
 	bool flag;
 	do{

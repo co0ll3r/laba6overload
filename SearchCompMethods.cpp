@@ -43,11 +43,6 @@ void SearchComp::testCopyConstructor(){
 	std::cout << "первый массив удален\n";
 	eg2.showInfo();
 }
-/*void SearchComp::swapElementsInVector(unsigned index){
-	RECORD temp = SearchResult[index];
-	SearchResult[index] = SearchResult[index - 1];
-	SearchResult[index - 1] = temp;
-}*/
 
 void SearchComp::OutputInFile(){
 	std::string file;
@@ -66,12 +61,8 @@ void SearchComp::OutputInFile(){
 	             std::setw(129) << "\n"; 
 	for (int i = 0; i < size; i++){
 		fout << std::setfill(' ') <<
-		   "|" << std::setw(5) << i + 1 << "|" << std::setw(6) <<SearchResult[i].CompCost << "|" 
-		   << std::setw(6) << SearchResult[i].CompInStock << 
-		     "|" << std::setw(16) << SearchResult[i].CompInfo.ProcName << "|" << std::setw(19) <<
-		     SearchResult[i].CompInfo.ProcType << "|" << std::setw(9) << SearchResult[i].CompInfo.ClockSpeed << "|" 
-		     << std::setw(24) << SearchResult[i].CompInfo.Graphics << "|" << std::setw(10) << SearchResult[i].CompInfo.GraphicVolume << "|" << std::setw(5) << 
-		     SearchResult[i].CompInfo.RAM << "|" << std::setw(17) << SearchResult[i].CompInfo.Storage << "|\n";
+		   "|" << std::setw(5) << i + 1 << "|";
+	        fout << SearchResult[i];
 		fout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
 }
@@ -83,17 +74,17 @@ void SearchComp::showInfo(){
 	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
 	             std::setw(129) << "\n"; 
 	for (int i = 0; i < size; i++){
-		std::cout << std::setfill(' ') <<
-		   "|" << std::setw(5) << i + 1 << "|" << std::setw(6) <<SearchResult[i].CompCost << "|" 
-		   << std::setw(6) << SearchResult[i].CompInStock << 
-		     "|" << std::setw(16) << SearchResult[i].CompInfo.ProcName << "|" << std::setw(19) <<
-		     SearchResult[i].CompInfo.ProcType << "|" << std::setw(9) << SearchResult[i].CompInfo.ClockSpeed << "|" 
-		     << std::setw(24) << SearchResult[i].CompInfo.Graphics << "|" << std::setw(10) << SearchResult[i].CompInfo.GraphicVolume << "|" << std::setw(5) << 
-		     SearchResult[i].CompInfo.RAM << "|" << std::setw(17) << SearchResult[i].CompInfo.Storage << "|\n";
+		std::cout << std::setfill(' ') << "|" << std::setw(5)
+		       	<< i + 1 << "|" << SearchResult[i];
 		std::cout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
 }
 
+void SearchComp::swapElementsInSearch(unsigned index){
+	RECORD temp = SearchResult[index];
+	SearchResult[index] = SearchResult[index - 1];
+	SearchResult[index - 1] = temp;
+}
 void SearchComp::SortProcTypeAndClock(){
 	std::cout << "Сортировка по типу процессора и частоте: \n";
 	unsigned n = size;
@@ -102,15 +93,15 @@ void SearchComp::SortProcTypeAndClock(){
 		flag = false;
 		for (unsigned i = 1; i < n; i++)
 		{
-			if (SearchResult[i].CompInfo.ProcType.compare(SearchResult[i - 1].CompInfo.ProcType) < 0)
+			if (SearchResult[i].CompInfo.ProcType < SearchResult[i - 1].CompInfo.ProcType)
 			{
-				swapElementsInMassive(i);
+				swapElementsInSearch(i);
 				flag = true;
 			}
-			else if (SearchResult[i].CompInfo.ProcType.compare(SearchResult[i - 1].CompInfo.ProcType) == 0 &&
+			else if (SearchResult[i].CompInfo.ProcType ==SearchResult[i - 1].CompInfo.ProcType &&
 				 SearchResult[i].CompInfo.ClockSpeed < SearchResult[i - 1].CompInfo.ClockSpeed)	
 			{
-				swapElementsInMassive(i);
+				swapElementsInSearch(i);
 				flag = true;
 			}
 		}
@@ -128,7 +119,7 @@ void SearchComp::SortRAM(){
 		for (unsigned i = 1; i < n; i++)
 		{
 			if (SearchResult[i - 1].CompInfo.RAM> SearchResult[i].CompInfo.RAM){
-				swapElementsInMassive(i);
+				swapElementsInSearch(i);
 				flag = true;
 			}
 		}
@@ -136,121 +127,6 @@ void SearchComp::SortRAM(){
 	} while(flag);
 	SearchComp::showInfo();
 }
-/* из четвертой лабы */
-/*void SearchComp::SearchPrice() {
-	if (size == 0)
-	{
-		std::cout << "Загрузите массив \n";
-		return;
-	}
-	double BottomBorder, TopBorder;
-	std::cout << "Введите нижнюю границу цены(нестрогое): ";
-	std::cin >> BottomBorder;
-	std::cout << "Введите верхнюю границу цены(нестрогое): ";
-	std::cin >> TopBorder;
-	std::vector<int> CollectIndexes; // Второй вариант со сбором индеков
-	for (unsigned i = 0; i < CapabilitiesComp.size(); i++)
-		if (BottomBorder <= CapabilitiesComp[i].CompCost && CapabilitiesComp[i].CompCost <= TopBorder)
-			CollectIndexes.push_back(i);
-	// Есть два варианта: 1) вектор собирающий индексы; 2) перераспределение памяти каждыый раз
-	if (CollectIndexes.size() == 0)
-	{
-		std::cout << "Не найдено!\n";
-		return;
-	}
-	SearchResult.clear();
-	for(unsigned i = 0; i < CollectIndexes.size(); i++)
-		SearchResult.insert(SearchResult.begin(), CapabilitiesComp[CollectIndexes[i]]);
-	this -> SearchComp::SortProcTypeAndClock();
-	char ch;
-	std::cout << "Желаете сохранить результаты поиска в файл?(y/n)\n";
-	std::cin >> ch;
-	if (ch == 'y' || ch == 'Y')
-		this -> OutputInFile();
-}
-
-void SearchComp::SearchHddVolume(){
-	if (CapabilitiesComp.size() == 0)
-	{
-		std::cout << "Загрузите массив \n";
-		return;
-	}
-	double BottomBorder, TopBorder;
-	std::cout << "Введите нижнюю границу размера памяти(нестрогое): ";
-	std::cin >> BottomBorder;
-	std::cout << "Введите верхнюю границу размера памяти(нестрогое): ";
-	std::cin >> TopBorder;
-	std::vector<int> CollectIndexes; // Второй вариант со сбором индеков
-	for (unsigned i = 0; i < CapabilitiesComp.size(); i++)
-	{
-		if (BottomBorder <= CapabilitiesComp[i].CompInfo.Storage && CapabilitiesComp[i].CompInfo.Storage <= TopBorder)
-			CollectIndexes.push_back(i);
-	}
-	if (CollectIndexes.size() == 0)
-	{
-		std::cout << "Не найдено!\n";
-		return;
-	}
-	SearchResult.clear();
-	for(unsigned i = 0; i < CollectIndexes.size(); i++)
-		SearchResult.insert(SearchResult.begin(), CapabilitiesComp[CollectIndexes[i]]);
-	this -> SearchComp::SortRAM();
-	char ch;
-	std::cout << "Желаете сохранить результаты поиска в файл?(y/n)\n";
-	std::cin >> ch;
-	if (ch == 'y' || ch == 'Y')
-		this -> OutputInFile();
-}
-
-void SearchComp::SearchBrandTypeRamETC(){
-	if (CapabilitiesComp.size() == 0)
-	{
-		std::cout << "Загрузите массив \n";
-		return;
-	}
-	std::string NameOfProc, TypeOfProc;
-	double BottomBorder, TopBorder, BBRAM, TBRAM, BBVideo, TBVideo;
-	std::cout << "Введите название марки процессора ";
-	std::cin >> NameOfProc;
-	std::cout << "Введите тип процессора ";
-	std::cin >> TypeOfProc;
-	std::cout << "Введите нижнюю границу размера памяти hdd(нестрогое): ";
-	std::cin >> BottomBorder;
-	std::cout << "Введите верхнюю границу размера памяти hdd(нестрогое): ";
-	std::cin >> TopBorder;
-	std::cout << "Введите нижнюю границу размера ОЗУ(нестрогое): ";
-	std::cin >> BBRAM;
-	std::cout << "Введите верхнюю границу размера ОЗУ(нестрогое): ";
-	std::cin >> TBRAM;
-	std::cout << "Введите нижнюю границу размера видеопамяти(нестрогое): ";
-	std::cin >> BBVideo;
-	std::cout << "Введите верхнюю границу размера видеопамяти(нестрогое): ";
-	std::cin >> TBVideo;
-	std::vector<int> CollectIndexes; // Второй вариант со сбором индеков
-	for (unsigned i = 0; i < CapabilitiesComp.size(); i++)
-		if (BottomBorder <= CapabilitiesComp[i].CompInfo.Storage && CapabilitiesComp[i].CompInfo.Storage <= TopBorder && 
-			NameOfProc == CapabilitiesComp[i].CompInfo.ProcName && CapabilitiesComp[i].CompInfo.ProcType == TypeOfProc &&
-		       	BBRAM <= CapabilitiesComp[i].CompInfo.RAM && CapabilitiesComp[i].CompInfo.RAM <= TBRAM &&
-		      	BBVideo<= CapabilitiesComp[i].CompInfo.GraphicVolume && CapabilitiesComp[i].CompInfo.GraphicVolume <= TBVideo)
-				CollectIndexes.push_back(i);
-	if (CollectIndexes.size() == 0)
-	{
-		std::cout << "Не найдено!\n";
-		return;
-	}
-	SearchResult.clear();
-	for(unsigned i = 0; i < CollectIndexes.size(); i++)
-		SearchResult.insert(SearchResult.begin(), CapabilitiesComp[CollectIndexes[i]]);
-	this -> SearchComp::showInfo();
-	char ch;
-	std::cout << "Желаете сохранить результаты поиска в файл?(y/n)\n";
-	std::cin >> ch;
-	if (ch == 'y' || ch == 'Y')
-		this -> OutputInFile();
-}
-*/
-
-// вариант из 2 лабы
 
 void SearchComp::SearchPrice(){
 	if (CapabilitiesComp == NULL)

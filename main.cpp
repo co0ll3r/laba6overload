@@ -67,7 +67,7 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 						case 1: ExampleComputer.SearchComp::SortProcTypeAndClock(); break;
 						case 2: ExampleComputer.SearchComp::SortRAM(); break;
 					}
-				}
+				}; break;
 		case 23: ExampleComputer.SearchComp::OutputInFile(); break;
 		case 24: ExampleComputer.workComputers::testCopyConstructor(); break;
 		case 25: ExampleComputer.workComputers::testCopyOperator(); break;

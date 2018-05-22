@@ -5,7 +5,6 @@ void swap(workComputers& first, workComputers& second){
 	std::swap(first.CapabilitiesComp, second.CapabilitiesComp);
 }
 workComputers::workComputers(const workComputers& copy) : workComputers(copy.size){
-//		 size(copy.size), CapabilitiesComp(size ? new RECORD[size] : nullptr) {
 	std::copy(copy.CapabilitiesComp, copy.CapabilitiesComp + size, CapabilitiesComp);
 }
 
@@ -14,7 +13,6 @@ workComputers& workComputers::operator=(workComputers copy){
 		swap(*this, copy);
 	return *this;
 }
-//size(copy.size), CapabilitiesComp(size ? new RECORD[size] : nullptr){
 
 void workComputers::testCopyOperator(){
 	workComputers eg;
@@ -60,12 +58,7 @@ void workComputers::InputFromFile(){
 		if (fin.fail()) 
 			break;
 		i++;
-		fin >> ab.CompCost >> ab.CompInStock >>
-			ab.CompInfo.ProcName >> ab.CompInfo.ProcType  >>  
-			ab.CompInfo.ClockSpeed >> ab.CompInfo.Graphics >>
-			ab.CompInfo.GraphicVolume >>
-			ab.CompInfo.RAM >> ab.CompInfo.Storage >> end;
-
+		fin >> ab >> end;
 		CopyCapComp = new RECORD[i + 1];
 		for (int j = 0; j < i; j++)
 			if (CapabilitiesComp != NULL)
@@ -95,53 +88,28 @@ void workComputers::OutputInFile(){
 	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
 	             std::setw(129) << "\n"; 
 	for (int i = 0; i < size; i++){
-		fout << std::setfill(' ') <<
-		   "|" << std::setw(5) << i + 1 << "|" << std::setw(6) <<CapabilitiesComp[i].CompCost << "|" 
-		   << std::setw(6) << CapabilitiesComp[i].CompInStock << 
-		     "|" << std::setw(16) << CapabilitiesComp[i].CompInfo.ProcName << "|" << std::setw(19) <<
-		     CapabilitiesComp[i].CompInfo.ProcType << "|" << std::setw(9) << CapabilitiesComp[i].CompInfo.ClockSpeed << "|" 
-		     << std::setw(24) << CapabilitiesComp[i].CompInfo.Graphics << "|" << std::setw(10) << CapabilitiesComp[i].CompInfo.GraphicVolume << "|" << std::setw(5) << 
-		     CapabilitiesComp[i].CompInfo.RAM << "|" << std::setw(17) << CapabilitiesComp[i].CompInfo.Storage << "|\n";
+		fout << std::setfill(' ') << "|" << std::setw(5) << i + 1 << "|";
+ 		fout << CapabilitiesComp[i];
 		fout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
 }
 
 void workComputers::Add_comp(){
-	RECORD add;
-	std::cout << "Введите марку процессора: ";
-	std::cin >> add.CompInfo.ProcName;
-	std::cout << "Введите тип процессора(хар-ки): ";
-	std::cin >> add.CompInfo.ProcType; 
-	std::cout << "Введите частоту процессора: ";
-	std::cin >> add.CompInfo.ClockSpeed; 
-	std::cout << "Введите название видеокарты: ";
-	std::cin >> add.CompInfo.Graphics;
-	std::cout << "Введите объем видеокарты: ";
-	std::cin >> add.CompInfo.GraphicVolume;
-	std::cout << "Введите объем ОЗУ: ";
-	std::cin >> add.CompInfo.RAM; 
-	std::cout << "Введите объем жесткого диска: "; 
-	std::cin >> add.CompInfo.Storage; 
-	std::cout << "Введите цену: ";
-	std::cin >> add.CompCost;
-	std::cout << "Введите количество компьютеров на складе: ";
-	std::cin >> add.CompInStock;
 	RECORD* CopyCapComp = new RECORD[size + 1];
 	if (CopyCapComp == NULL)
 	{
 		std::cout << "Ошибка выделения памяти при добавлении компьютера!\n";
-		exit(-1);
+		return;//exit(-1);
 	}
 	for (int j = 0; j < size; j++)
 		if (CapabilitiesComp != NULL)
 			CopyCapComp[j] = CapabilitiesComp[j];
-	CopyCapComp[size] = add;
+	std::cin >> CopyCapComp[size];
 	if (CapabilitiesComp != NULL)
 		delete [] CapabilitiesComp;
 	CapabilitiesComp = CopyCapComp;
 	size++;
 	CopyCapComp = NULL;
-
 }
 
 void workComputers::Delete_comp(){
@@ -185,13 +153,9 @@ void workComputers::showInfo(){
 	             std::setw(129) << "\n"; 
 	for (int i = 0; i < size; i++){
 		std::cout << std::setfill(' ') <<
-		   "|" << std::setw(5) << i + 1 << "|" << std::setw(6) <<CapabilitiesComp[i].CompCost << "|" 
-		   << std::setw(6) << CapabilitiesComp[i].CompInStock << 
-		     "|" << std::setw(16) << CapabilitiesComp[i].CompInfo.ProcName << "|" << std::setw(19) <<
-		     CapabilitiesComp[i].CompInfo.ProcType << "|" << std::setw(9) << CapabilitiesComp[i].CompInfo.ClockSpeed << "|" 
-		     << std::setw(24) << CapabilitiesComp[i].CompInfo.Graphics << "|" << std::setw(10) << CapabilitiesComp[i].CompInfo.GraphicVolume << "|" << std::setw(5) << 
-		     CapabilitiesComp[i].CompInfo.RAM << "|" << std::setw(17) << CapabilitiesComp[i].CompInfo.Storage << "|\n";
-		std::cout << std::setfill('-') << std::setw(129) << "\n"; 
+		       	"|" << std::setw(5) << i + 1 << "|" 
+			<< CapabilitiesComp[i];
+			std::cout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
 }
 
