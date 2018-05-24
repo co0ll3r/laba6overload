@@ -12,7 +12,8 @@ class Perechen;
 class workComputers;
 class aggregate;
 
-struct COMP{
+class COMP{
+public:
 	std::string ProcName; // Brand name
 	std::string ProcType; // Specification
 	std::string Graphics; // Graphic Card
@@ -28,7 +29,8 @@ struct COMP{
 	friend std::ofstream& operator<<(std::ofstream&, COMP);
 };
 
-struct RECORD{
+class RECORD{
+public:
 	COMP CompInfo;
 	double CompCost;
 	int CompInStock;
@@ -40,19 +42,34 @@ struct RECORD{
 	friend std::ofstream& operator<<(std::ofstream&, RECORD);
 };
 
-struct BrandPerech{
+class BrandPerech{
+public:
 	std::string ProcName;
 	int Count;
+
+	/* overloads*/
+	friend std::ostream& operator<<(std::ostream&, BrandPerech);
+	friend std::ofstream& operator<<(std::ofstream&, BrandPerech);
 };
 
-struct TypeProcPerech{
+class TypeProcPerech{
+public:
 	std::string ProcType;
 	int Count;
+
+	/* overloads*/
+	friend std::ostream& operator<<(std::ostream&, TypeProcPerech);
+	friend std::ofstream& operator<<(std::ofstream&, TypeProcPerech);
 };
 
-struct VideocardsPerech{
+class VideocardsPerech{
+public:
  	double GraphicVolume;
 	int Count;
+
+	/* overloads*/
+	friend std::ostream& operator<<(std::ostream&, VideocardsPerech);
+	friend std::ofstream& operator<<(std::ofstream&, VideocardsPerech);
 }; 
 
 class workComputers {
@@ -122,10 +139,14 @@ class Perechen : public SearchComp{
 		Perechen(int sB = 0, int sP = 0, int sV = 0) : pBrandlen(sB), pProclen(sP), pVideolen(sV), perechenBrands(pBrandlen ? new BrandPerech[pBrandlen] : nullptr), perechenProcTypes(pProclen? new TypeProcPerech[pProclen] : nullptr), perechenVideocardVolume(pVideolen ? new VideocardsPerech[pVideolen] : nullptr) {}
 		~Perechen() { delete [] perechenBrands; delete [] perechenProcTypes; delete [] perechenVideocardVolume;}
 		Perechen(const Perechen&); 
+
+		/*overloads*/
 		Perechen& operator=(Perechen); 
-		friend void swap(Perechen&, Perechen&);
+		friend std::ofstream& operator<<(std::ofstream&, Perechen);
+		friend std::ostream& operator<<(std::ostream&, Perechen);
 		
 		/* Methods */
+		friend void swap(Perechen&, Perechen&);
 		virtual void testCopyConstructor();
 		virtual void testCopyOperator();
 
@@ -138,6 +159,7 @@ class Perechen : public SearchComp{
 		void saveFirstPerech();
 		void saveSecondPerech(); 
 		void saveThirdPerech();
+//		friend void saveAllPerech(Perechen);
 
 		friend void makePerechen1(workComputers, Perechen&);
 		friend void makePerechen2(workComputers, Perechen&);

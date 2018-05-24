@@ -43,13 +43,14 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 			case 16: ExampleComputer.sortCountSecondPerech();break; 
 			case 17: ExampleComputer.sortVideoVolumeThirdPerech(); break; 
 			case 18: {
-					 std::cout << "1. Сохранить 1\n 2. Сохранить 2\n 3. Сохранить 3\n";
+					 std::cout << "1. Сохранить 1\n 2. Сохранить 2\n3. Сохранить 3\n";/*4. Сохранить все в одном файле;\n"*/
 					 int j;
 					 std::cin >> j;
 					 switch(j){
 						 case 1: ExampleComputer.saveFirstPerech(); break;
 						 case 2: ExampleComputer.saveSecondPerech(); break;
 						 case 3: ExampleComputer.saveThirdPerech(); break;
+//						 case 4: saveAllPerech(ExampleComputer); break;
 						 default: break;
 					 }
 					 break;

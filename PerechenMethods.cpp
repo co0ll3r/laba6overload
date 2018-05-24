@@ -75,7 +75,7 @@ void Perechen::showFirstPerech(){
 		std::setw(57) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pBrandlen; i++)
-		std::cout << '|' << std::setw(29) << perechenBrands[i].ProcName << '|' << std::setw(24) << perechenBrands[i].Count << "|\n";
+		std::cout << perechenBrands[i];
 	std::cout << '\n';
 }
 
@@ -85,7 +85,7 @@ void Perechen::showSecondPerech(){
 		std::setw(52) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pProclen; i++)
-		std::cout << '|' << std::setw(24) << perechenProcTypes[i].ProcType<< '|' << std::setw(24) << perechenProcTypes[i].Count << "|\n";
+		std::cout << perechenProcTypes[i];
 	std::cout << '\n';
 }
 
@@ -95,25 +95,16 @@ void Perechen::showThirdPerech(){
 		std::setw(55) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pVideolen; i++)
-		std::cout << '|' << std::setw(27) << perechenVideocardVolume[i].GraphicVolume << '|' << std::setw(24) << perechenVideocardVolume[i].Count << "|\n";
+		std::cout << perechenVideocardVolume[i];
 	std::cout << '\n';
 }
 
-/*template <class PerechenTemplate>
-void swapElementsInPerechen(int index, PerechenTemplate CL){
-	PerechenTemplate temp = CL; 
-	CL[index] = CL[index - 1];
-       	CL[index - 1] = temp;	
-}*/
-
 void Perechen::sortProcTypeFirstPerech(){
-//	std::cout << "Сортировка перечня по названию процессора \n";
 	int n = pBrandlen;
 	bool flag;
 	do{
 		flag = false;
 		for (int i = 1; i < n; i++){
-			//			swapElementsInPerechen(i, *this ->perechenBrands);
 			if (perechenBrands[i - 1].ProcName > perechenBrands[i].ProcName)
 			{
 				BrandPerech temp = perechenBrands[i];
@@ -124,11 +115,9 @@ void Perechen::sortProcTypeFirstPerech(){
 		}
 		n--;
 	} while (flag);	
-//	showFirstPerech();
 }
 
 void Perechen::sortCountSecondPerech(){
-//	std::cout << "Сортировка перечня по количеству компьютеров с данным процессором\n";
 	int n = pProclen;
 	bool flag;
 	do{
@@ -144,11 +133,9 @@ void Perechen::sortCountSecondPerech(){
 		}
 		n--;
 	} while (flag);
-//	showSecondPerech();
 }
 
 void Perechen::sortVideoVolumeThirdPerech(){
-//	std::cout << "Сортировака перечня по объему видеопамяти\n";
 	int n = pVideolen;
 	bool flag;
 	do{
@@ -165,7 +152,6 @@ void Perechen::sortVideoVolumeThirdPerech(){
 		}
 		n--;
 	} while (flag);	
-//	showThirdPerech();
 }
 
 void Perechen::saveFirstPerech(){
@@ -182,9 +168,8 @@ void Perechen::saveFirstPerech(){
 		"|     Название процессора     | Количество компьютеров |\n" << 
 	std::setw(57) << '\n';
 	fout << std::setfill(' ');
-//	std::cout << pBrandlen << '\n';
 	for (int i = 0; i < pBrandlen; i++)
-		fout << '|' << std::setw(29) << perechenBrands[i].ProcName << '|' << std::setw(24) << perechenBrands[i].Count << "|\n";
+		fout << perechenBrands[i];
 	fout << '\n';
 }
 
@@ -203,7 +188,7 @@ void Perechen::saveSecondPerech(){
 		std::setw(52) << '\n';
 	fout << std::setfill(' ');
 	for (int i = 0; i < pProclen; i++)
-		fout << '|' << std::setw(24) << perechenProcTypes[i].ProcType<< '|' << std::setw(24) << perechenProcTypes[i].Count << "|\n";
+		fout << perechenProcTypes[i];
 	fout << '\n';
 }
 
@@ -222,9 +207,23 @@ void Perechen::saveThirdPerech(){
 		std::setw(55) << '\n';
 	fout << std::setfill(' ');
 	for (int i = 0; i < pVideolen; i++)
-		fout << '|' << std::setw(27) << perechenVideocardVolume[i].GraphicVolume << '|' << std::setw(24) << perechenVideocardVolume[i].Count << "|\n";
+		fout << perechenVideocardVolume[i];
 	fout << '\n';
 }
+
+/*void saveAllPerech(Perechen a){
+	std::string file;
+	std::cout << "Введите имя файла для сохранения 3 перечень\n";
+	std::cin >> file;
+	std::ofstream fout;
+	fout.open(file);
+	if (fout.fail()){
+		std::cout << file << " не удалось открыть файл\n";
+		return;
+	}
+	fout << a;
+	fout << "\n";
+}*/
 
 void makePerechen1(workComputers clWorkComp, Perechen& clPerech){
 	if (clWorkComp.size == 0){
