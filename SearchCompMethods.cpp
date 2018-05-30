@@ -221,7 +221,7 @@ void SearchComp::SearchBrandTypeRamETC(){
 	std::cout << "Введите верхнюю границу размера видеопамяти(нестрогое): ";
 	std::cin >> TBVideo;
 	std::vector<int> CollectIndexes; // Второй вариант со сбором индеков
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < workComputers::size; i++)
 	{
 		if (BottomBorder <= CapabilitiesComp[i].CompInfo.Storage && CapabilitiesComp[i].CompInfo.Storage <= TopBorder && 
 			NameOfProc == CapabilitiesComp[i].CompInfo.ProcName && CapabilitiesComp[i].CompInfo.ProcType == TypeOfProc &&
