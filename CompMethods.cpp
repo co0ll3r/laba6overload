@@ -191,13 +191,7 @@ void workComputers::SortProcName(){
 		flag = false;
 		for (unsigned i = 1; i < n; i++)
 		{
-			if (CapabilitiesComp[i].CompInfo.ProcName.compare(CapabilitiesComp[i - 1].CompInfo.ProcName) < 0)
-			{
-				swapElementsInMassive(i);
-				flag = true;
-			}
-			else if (CapabilitiesComp[i].CompInfo.ProcName.compare(CapabilitiesComp[i - 1].CompInfo.ProcName) == 0 &&
-					CapabilitiesComp[i].CompInfo.ProcType.compare(CapabilitiesComp[i - 1].CompInfo.ProcType) < 0)
+			if (CapabilitiesComp[i] < CapabilitiesComp[i - 1])
 			{
 				swapElementsInMassive(i);
 				flag = true;

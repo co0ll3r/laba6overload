@@ -70,7 +70,7 @@ std::ofstream& operator<<(std::ofstream& out, RECORD a){
 bool operator<(COMP& a, COMP& b){
 	if (a.ProcType< b.ProcType)
 		return true;
-	else if (a.ProcType== b.ProcType && a.ClockSpeed < b.ClockSpeed)
+	else if (a.ProcType == b.ProcType && a.ClockSpeed < b.ClockSpeed)
 		return true;
 	return false;
 }
@@ -79,4 +79,11 @@ bool operator==(COMP& a, COMP& b){
 	return a.ProcName == b.ProcName;
 }
 
-
+bool operator<(RECORD& a, RECORD& b){
+	if (a.CompInfo.ProcName < b.CompInfo.ProcName)
+		return true;
+	else if (a.CompInfo.ProcName == b.CompInfo.ProcName &&
+			a.CompInfo.ProcType < b.CompInfo.ProcType)
+		return true;
+	return false;
+}

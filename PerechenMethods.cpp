@@ -24,14 +24,18 @@ Perechen& Perechen::operator=(Perechen copy){
 }
 
 void Perechen::testCopyOperator(){
-	Perechen eg, eg2;
-	eg = *this;
-	std::cout << "вывод первого объекта:\n";
-	eg.showFirstPerech();
-	eg.showSecondPerech();
-	eg.showThirdPerech();
-	eg2 = eg;
-	std::cout << "вывод второго объекта:\n";
+	Perechen eg2;
+	if (true){
+		Perechen eg;
+		eg = *this;
+		std::cout << "вывод первого объекта:\n";
+		eg.showFirstPerech();
+		eg.showSecondPerech();
+		eg.showThirdPerech();
+		std::cout << "копирование объекта через оператор присваивания\n";
+		eg2 = eg;
+	}
+	std::cout << "Очистка первого объекта.\nвывод второго объекта:\n";
 	eg2.showFirstPerech();
 	eg2.showSecondPerech();
 	eg2.showThirdPerech();

@@ -15,16 +15,25 @@ SearchComp& SearchComp::operator=(SearchComp copy){
 	return *this;
 }
 void SearchComp::testCopyOperator(){
-	SearchComp eg, eg2;
-	eg = *this;
-	eg.SearchComp::showInfo();
-	eg2 = eg;
+	SearchComp eg2;
+	if (true){
+		SearchComp eg;
+		eg = *this;
+		std::cout << "вывод первого объекта:\n";
+		eg.SearchComp::showInfo();
+		std::cout << "копирование объекта через оператор присваивания\n";
+		eg2 = eg;
+	}
+	std::cout << "Очистка первого объекта.\nвывод второго объекта:\n";
 	eg2.SearchComp::showInfo();
 }
 void SearchComp::testCopyConstructor(){
 	SearchComp eg(*this);
+	std::cout << "вывод первого объекта:\n";
 	eg.SearchComp::showInfo();
+	std::cout << "Копирование первого объекта через конструктор:\n";
 	SearchComp eg2(eg);
+	std::cout << "вывод второго объекта:\n";
 	eg2.SearchComp::showInfo();
 }
 void SearchComp::OutputInFile(){

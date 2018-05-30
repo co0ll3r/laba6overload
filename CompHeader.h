@@ -30,9 +30,9 @@ struct COMP{
 
 	/* overloads relational operators */
 	friend bool operator<(COMP& a, COMP& b);
-	friend bool operator>(COMP& a, COMP& b){ return !(a < b && a != b); }
+	bool operator>(COMP& a){ return !(a < *this && a != *this); }
 	friend bool operator==(COMP&, COMP&);
-	friend bool operator!=(COMP& a, COMP& b) {return !(a==b);}
+	bool operator!=(COMP& a) {return !(a == *this);}
 };
 
 struct RECORD{
@@ -46,6 +46,12 @@ struct RECORD{
 	friend std::ostream& operator<<(std::ostream&, RECORD);
 	friend std::ifstream& operator>>(std::ifstream&, RECORD&);
 	friend std::ofstream& operator<<(std::ofstream&, RECORD);
+
+	/* overloads relational operators */
+	friend bool operator<(RECORD& a, RECORD& b);
+	bool operator>(RECORD& a){ return !(a < *this && a != *this); }
+	friend bool operator==(RECORD&, RECORD&);
+	bool operator!=(RECORD& a) {return !(a == *this);}
 };
 
 struct BrandPerech{
@@ -94,7 +100,8 @@ struct VideocardsPerech{
 	friend bool operator!=(VideocardsPerech& a, VideocardsPerech& b) {return !(a==b);}
 }; 
 
-struct workComputers {
+class workComputers {
+	public:
 		/*Constructors*/
 		workComputers(int size = 0) : size(size), CapabilitiesComp(size ? new RECORD[size] : nullptr) {}
 		~workComputers() { delete [] CapabilitiesComp; }
