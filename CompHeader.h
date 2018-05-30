@@ -12,8 +12,8 @@ class Perechen;
 class workComputers;
 class aggregate;
 
-class COMP{
-public:
+struct COMP{
+	/*class fields */
 	std::string ProcName; // Brand name
 	std::string ProcType; // Specification
 	std::string Graphics; // Graphic Card
@@ -22,15 +22,21 @@ public:
 	double RAM;
 	double Storage;
 	
-	/* overloads*/
+	/* overloads I/0*/
 	friend std::istream& operator>>(std::istream&, COMP&);
 	friend std::ostream& operator<<(std::ostream&, COMP);
 	friend std::ifstream& operator>>(std::ifstream&, COMP&);
 	friend std::ofstream& operator<<(std::ofstream&, COMP);
+
+	/* overloads relational operators */
+	friend bool operator<(COMP& a, COMP& b);
+	friend bool operator>(COMP& a, COMP& b){ return !(a < b && a != b); }
+	friend bool operator==(COMP&, COMP&);
+	friend bool operator!=(COMP& a, COMP& b) {return !(a==b);}
 };
 
-class RECORD{
-public:
+struct RECORD{
+	/*class fields */
 	COMP CompInfo;
 	double CompCost;
 	int CompInStock;
@@ -42,38 +48,53 @@ public:
 	friend std::ofstream& operator<<(std::ofstream&, RECORD);
 };
 
-class BrandPerech{
-public:
+struct BrandPerech{
+	/*class fields */
 	std::string ProcName;
 	int Count;
 
 	/* overloads*/
 	friend std::ostream& operator<<(std::ostream&, BrandPerech);
 	friend std::ofstream& operator<<(std::ofstream&, BrandPerech);
+
+	/* overloads relational operators */
+	friend bool operator<(BrandPerech& a, BrandPerech& b);
+	friend bool operator>(BrandPerech& a, BrandPerech& b){ return !(a < b && a != b); }
+	friend bool operator==(BrandPerech& a, BrandPerech& b);
+	friend bool operator!=(BrandPerech& a, BrandPerech& b) {return !(a==b);}
 };
 
-class TypeProcPerech{
-public:
+struct TypeProcPerech{
+	/*class fields */
 	std::string ProcType;
 	int Count;
 
 	/* overloads*/
 	friend std::ostream& operator<<(std::ostream&, TypeProcPerech);
 	friend std::ofstream& operator<<(std::ofstream&, TypeProcPerech);
+	/* overloads relational operators */
+	friend bool operator<(TypeProcPerech& a, TypeProcPerech& b);
+	friend bool operator>(TypeProcPerech& a, TypeProcPerech& b){ return !(a < b && a != b); }
+	friend bool operator==(TypeProcPerech& a, TypeProcPerech& b);
+	friend bool operator!=(TypeProcPerech& a, TypeProcPerech& b) {return !(a==b);}
 };
 
-class VideocardsPerech{
-public:
+struct VideocardsPerech{
+	/*class fields */
  	double GraphicVolume;
 	int Count;
 
 	/* overloads*/
 	friend std::ostream& operator<<(std::ostream&, VideocardsPerech);
 	friend std::ofstream& operator<<(std::ofstream&, VideocardsPerech);
+	/* overloads relational operators */
+	friend bool operator<(VideocardsPerech& a, VideocardsPerech& b);
+	friend bool operator>(VideocardsPerech& a, VideocardsPerech& b){ return !(a < b && a != b); }
+	friend bool operator==(VideocardsPerech& a, VideocardsPerech& b);
+	friend bool operator!=(VideocardsPerech& a, VideocardsPerech& b) {return !(a==b);}
 }; 
 
-class workComputers {
-	public:
+struct workComputers {
 		/*Constructors*/
 		workComputers(int size = 0) : size(size), CapabilitiesComp(size ? new RECORD[size] : nullptr) {}
 		~workComputers() { delete [] CapabilitiesComp; }
@@ -81,8 +102,6 @@ class workComputers {
 
 		/* overloads*/
 		workComputers& operator=(workComputers);
-//		friend std::istream& operator>>(std::istream&, workComputers);
-//		friend std::ostream& operator<<(std::ostream&, workComputers);
 		
 		/* METHODS*/
 		friend void swap(workComputers&, workComputers&);
@@ -102,6 +121,7 @@ class workComputers {
 		friend void makePerechen1(workComputers, Perechen&);
 		friend void makePerechen2(workComputers,Perechen&);
 		friend void makePerechen3(workComputers, Perechen&);
+	/*class fields */
 	protected:
 		int size;
 		RECORD* CapabilitiesComp;
@@ -128,6 +148,7 @@ class SearchComp : public workComputers{
 		virtual void SortProcTypeAndClock();
 		virtual void showInfo();
 		void swapElementsInSearch(unsigned);
+	/*class fields */
 	private:
 		int size;
 		RECORD* SearchResult;
@@ -142,8 +163,6 @@ class Perechen : public SearchComp{
 
 		/*overloads*/
 		Perechen& operator=(Perechen); 
-		friend std::ofstream& operator<<(std::ofstream&, Perechen);
-		friend std::ostream& operator<<(std::ostream&, Perechen);
 		
 		/* Methods */
 		friend void swap(Perechen&, Perechen&);
@@ -159,11 +178,11 @@ class Perechen : public SearchComp{
 		void saveFirstPerech();
 		void saveSecondPerech(); 
 		void saveThirdPerech();
-//		friend void saveAllPerech(Perechen);
 
 		friend void makePerechen1(workComputers, Perechen&);
 		friend void makePerechen2(workComputers, Perechen&);
 		friend void makePerechen3(workComputers, Perechen&);
+	/*class fields */
 	private:
 		int pBrandlen, pProclen, pVideolen;
 		BrandPerech* perechenBrands;

@@ -16,27 +16,27 @@ workComputers& workComputers::operator=(workComputers copy){
 
 void workComputers::testCopyOperator(){
 	workComputers eg;
-	std::cout << "введите первый массив:\n";
-	eg.InputFromFile();
-	eg.showInfo();
 	if (true){
 		workComputers eg2;
-		std::cout << "введите второй массив:\n";
-		eg2.InputFromFile();
-		eg2.showInfo();
+		eg2 = *this;
+		std::cout << "второй объект присваиваем первому:\n";
 		eg = eg2;
+		std::cout << "вывод второго объекта:\n";
+		eg2.showInfo();
 	}
-	std::cout << "очистка второго массива\n";
+	std::cout << "очистка второго объекта\n";
+	eg = *this;
+	std::cout << "вывод первого объекта:\n";
 	eg.showInfo();
 }
 
 void workComputers::testCopyConstructor(){
-	workComputers eg;
-	std::cout << "введите первый массив:\n";
-	eg.InputFromFile();
+	workComputers eg(*this);
+	std::cout << "вывод первого объекта:\n";
 	eg.showInfo();
+	std::cout << "создаем второй объект, с помощью конструтора:\n";
 	workComputers eg2(eg);
-	std::cout << "первый массив удален\n";
+	std::cout << "вывод второго объекта:\n";
 	eg2.showInfo();
 }
 
@@ -173,14 +173,7 @@ void workComputers::SortProcTypeAndClock(){
 		flag = false;
 		for (unsigned i = 1; i < n; i++)
 		{
-			if (CapabilitiesComp[i].CompInfo.ProcType.compare(CapabilitiesComp[i - 1].CompInfo.ProcType) < 0)
-			{
-				swapElementsInMassive(i);
-				flag = true;
-			}
-			else if (CapabilitiesComp[i].CompInfo.ProcType.compare(CapabilitiesComp[i - 1].CompInfo.ProcType) == 0 &&
-				 CapabilitiesComp[i].CompInfo.ClockSpeed < CapabilitiesComp[i - 1].CompInfo.ClockSpeed)	
-			{
+			if (CapabilitiesComp[i].CompInfo < CapabilitiesComp[i - 1].CompInfo){
 				swapElementsInMassive(i);
 				flag = true;
 			}

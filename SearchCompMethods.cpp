@@ -14,36 +14,19 @@ SearchComp& SearchComp::operator=(SearchComp copy){
 		swap(*this, copy);
 	return *this;
 }
-
 void SearchComp::testCopyOperator(){
-	SearchComp eg;
-	std::cout << "введите первый массив:\n";
-	eg.InputFromFile();
-	eg.workComputers::showInfo();
-	eg.SearchPrice();
-	if (true){
-		SearchComp eg2;
-		std::cout << "введите второй массив:\n";
-		eg2.InputFromFile();
-		eg2.workComputers::showInfo();
-		eg2.SearchPrice();
-		eg = eg2;
-	}
-	std::cout << "очистка второго массива\n";
-	eg.showInfo();
+	SearchComp eg, eg2;
+	eg = *this;
+	eg.SearchComp::showInfo();
+	eg2 = eg;
+	eg2.SearchComp::showInfo();
 }
-
 void SearchComp::testCopyConstructor(){
-	SearchComp eg;
-	std::cout << "введите первый массив:\n";
-	eg.InputFromFile();
-	eg.workComputers::showInfo();
-	eg.SearchPrice();
+	SearchComp eg(*this);
+	eg.SearchComp::showInfo();
 	SearchComp eg2(eg);
-	std::cout << "первый массив удален\n";
-	eg2.showInfo();
+	eg2.SearchComp::showInfo();
 }
-
 void SearchComp::OutputInFile(){
 	std::string file;
 	std::cout << "Введите имя файла для сохранения\n";
@@ -93,13 +76,7 @@ void SearchComp::SortProcTypeAndClock(){
 		flag = false;
 		for (unsigned i = 1; i < n; i++)
 		{
-			if (SearchResult[i].CompInfo.ProcType < SearchResult[i - 1].CompInfo.ProcType)
-			{
-				swapElementsInSearch(i);
-				flag = true;
-			}
-			else if (SearchResult[i].CompInfo.ProcType ==SearchResult[i - 1].CompInfo.ProcType &&
-				 SearchResult[i].CompInfo.ClockSpeed < SearchResult[i - 1].CompInfo.ClockSpeed)	
+			if (SearchResult[i].CompInfo < SearchResult[i - 1].CompInfo)
 			{
 				swapElementsInSearch(i);
 				flag = true;

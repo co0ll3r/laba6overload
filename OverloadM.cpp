@@ -64,3 +64,19 @@ std::ofstream& operator<<(std::ofstream& out, RECORD a){
 	out << a.CompInfo;
 	return out;
 }
+
+
+// ПЕРЕГРУЗКИ операторов сравнения
+bool operator<(COMP& a, COMP& b){
+	if (a.ProcType< b.ProcType)
+		return true;
+	else if (a.ProcType== b.ProcType && a.ClockSpeed < b.ClockSpeed)
+		return true;
+	return false;
+}
+
+bool operator==(COMP& a, COMP& b){
+	return a.ProcName == b.ProcName;
+}
+
+

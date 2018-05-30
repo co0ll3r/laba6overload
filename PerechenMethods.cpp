@@ -24,51 +24,31 @@ Perechen& Perechen::operator=(Perechen copy){
 }
 
 void Perechen::testCopyOperator(){
-	Perechen eg;
-	std::cout << "введите первый массив:\n";
-	eg.InputFromFile();
-	eg.workComputers::showInfo();
-	makePerechen1(eg, eg);
-	makePerechen2(eg, eg);
-	makePerechen3(eg, eg);
+	Perechen eg, eg2;
+	eg = *this;
+	std::cout << "вывод первого объекта:\n";
 	eg.showFirstPerech();
 	eg.showSecondPerech();
 	eg.showThirdPerech();
-	if (true){
-		Perechen eg2;
-		std::cout << "введите второй массив:\n";
-		eg2.InputFromFile();
-		eg2.workComputers::showInfo();
-		makePerechen1(eg2, eg2);
-		makePerechen2(eg2, eg2);
-		makePerechen3(eg2, eg2);
-		eg = eg2;
-	}
-	std::cout << "очистка второго массива\n";
-	eg.showFirstPerech();
-	eg.showSecondPerech();
-	eg.showThirdPerech();
-}
-
+	eg2 = eg;
+	std::cout << "вывод второго объекта:\n";
+	eg2.showFirstPerech();
+	eg2.showSecondPerech();
+	eg2.showThirdPerech();
+};
 void Perechen::testCopyConstructor(){
-	workComputers some;
-	Perechen eg;
-	std::cout << "введите первый массив:\n";
-	some.InputFromFile();
-	makePerechen1(some, eg);
-	makePerechen2(some, eg);
-	makePerechen3(some, eg);
+	Perechen eg(*this);
+	std::cout << "вывод первого объекта:\n";
 	eg.showFirstPerech();
 	eg.showSecondPerech();
 	eg.showThirdPerech();
+	std::cout << "Копирование первого объекта через конструктор:\n";
 	Perechen eg2(eg);
-	//eg.Perechen::~Perechen();
-	std::cout << "первый массив удален\n";
+	std::cout << "вывод второго объекта:\n";
 	eg2.showFirstPerech();
 	eg2.showSecondPerech();
 	eg2.showThirdPerech();
 }
-
 void Perechen::showFirstPerech(){
 	std::cout << std::setfill('-') << std::setw(57) << '\n' <<
 		"|     Название процессора     | Количество компьютеров |\n" << 
@@ -105,7 +85,7 @@ void Perechen::sortProcTypeFirstPerech(){
 	do{
 		flag = false;
 		for (int i = 1; i < n; i++){
-			if (perechenBrands[i - 1].ProcName > perechenBrands[i].ProcName)
+			if (perechenBrands[i - 1] > perechenBrands[i])
 			{
 				BrandPerech temp = perechenBrands[i];
 				perechenBrands[i] = perechenBrands[i - 1];
@@ -123,7 +103,7 @@ void Perechen::sortCountSecondPerech(){
 	do{
 		flag = false;
 		for(int i = 1; i < n; i++){
-			if (perechenProcTypes[i - 1].Count > perechenProcTypes[i].Count)			
+			if (perechenProcTypes[i - 1] > perechenProcTypes[i])			
 			{
 				TypeProcPerech temp = perechenProcTypes[i];
 				perechenProcTypes[i] = perechenProcTypes[i - 1];
@@ -141,7 +121,7 @@ void Perechen::sortVideoVolumeThirdPerech(){
 	do{
 		flag = false;
 		for (int i = 1; i < n; i++){
-			if (perechenVideocardVolume[i - 1].GraphicVolume > perechenVideocardVolume[i].GraphicVolume)
+			if (perechenVideocardVolume[i - 1] > perechenVideocardVolume[i])
 			{
 				VideocardsPerech temp = perechenVideocardVolume[i];
 
