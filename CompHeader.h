@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <fstream>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -109,6 +108,10 @@ class workComputers {
 
 		/* overloads*/
 		workComputers& operator=(workComputers);
+		friend std::istream& operator>>(std::istream&, workComputers&);
+		friend std::ostream& operator<<(std::ostream&, workComputers);
+		friend std::ifstream& operator>>(std::ifstream&, workComputers&);
+		friend std::ofstream& operator<<(std::ofstream&, workComputers);
 		
 		/* METHODS*/
 		friend void swap(workComputers&, workComputers&);
@@ -119,7 +122,7 @@ class workComputers {
 		virtual void OutputInFile();
 		void Add_comp();
 		void Delete_comp();
- 		virtual	void showInfo();
+		// 	virtual	void showInfo();
 		void swapElementsInMassive(unsigned);
 		virtual	void SortProcTypeAndClock();
 		void SortProcName();
@@ -140,8 +143,14 @@ class SearchComp : public workComputers{
 		SearchComp(int size = 0) : size(size), SearchResult(size ? new RECORD[size] : nullptr) {}
 		~SearchComp(){ delete [] SearchResult; }
 		SearchComp(const SearchComp&);
-		SearchComp& operator=(SearchComp);
 		friend void swap(SearchComp&, SearchComp&);
+
+		/* overloads*/
+		SearchComp& operator=(SearchComp);
+		friend std::istream& operator>>(std::istream&, SearchComp&);
+		friend std::ostream& operator<<(std::ostream&, SearchComp);
+		friend std::ifstream& operator>>(std::ifstream&, SearchComp&);
+		friend std::ofstream& operator<<(std::ofstream&, SearchComp);
 
 		/* METHODS */
 		virtual void testCopyConstructor();
@@ -153,7 +162,7 @@ class SearchComp : public workComputers{
 		void SortRAM();
 		virtual void OutputInFile();
 		virtual void SortProcTypeAndClock();
-		virtual void showInfo();
+//		virtual void showInfo();
 		void swapElementsInSearch(unsigned);
 	/*class fields */
 	private:
@@ -170,6 +179,7 @@ class Perechen : public SearchComp{
 
 		/*overloads*/
 		Perechen& operator=(Perechen); 
+		friend std::ostream& operator<<(std::ostream&, Perechen); // перегрузка вывода меню
 		
 		/* Methods */
 		friend void swap(Perechen&, Perechen&);

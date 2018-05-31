@@ -20,21 +20,21 @@ void SearchComp::testCopyOperator(){
 		SearchComp eg;
 		eg = *this;
 		std::cout << "вывод первого объекта:\n";
-		eg.SearchComp::showInfo();
+		std::cout << eg;
 		std::cout << "копирование объекта через оператор присваивания\n";
 		eg2 = eg;
 	}
 	std::cout << "Очистка первого объекта.\nвывод второго объекта:\n";
-	eg2.SearchComp::showInfo();
+	std::cout << eg2;
 }
 void SearchComp::testCopyConstructor(){
 	SearchComp eg(*this);
 	std::cout << "вывод первого объекта:\n";
-	eg.SearchComp::showInfo();
+	std::cout << eg;
 	std::cout << "Копирование первого объекта через конструктор:\n";
 	SearchComp eg2(eg);
 	std::cout << "вывод второго объекта:\n";
-	eg2.SearchComp::showInfo();
+	std::cout << eg2;
 }
 void SearchComp::OutputInFile(){
 	std::string file;
@@ -59,6 +59,7 @@ void SearchComp::OutputInFile(){
 	}
 }
 
+/*
 void SearchComp::showInfo(){
 	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
 	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
@@ -71,6 +72,7 @@ void SearchComp::showInfo(){
 		std::cout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
 }
+*/
 
 void SearchComp::swapElementsInSearch(unsigned index){
 	RECORD temp = SearchResult[index];
@@ -93,7 +95,7 @@ void SearchComp::SortProcTypeAndClock(){
 		}
 		n--;
 	} while (flag);
-	SearchComp::showInfo();
+	std::cout << *this;
 }
 
 void SearchComp::SortRAM(){
@@ -111,7 +113,7 @@ void SearchComp::SortRAM(){
 		}
 		n--;
 	} while(flag);
-	SearchComp::showInfo();
+	std::cout << *this;
 }
 
 void SearchComp::SearchPrice(){
@@ -242,7 +244,7 @@ void SearchComp::SearchBrandTypeRamETC(){
 
 	for (int i = 0; i < size; i++)
 		SearchResult[i] = CapabilitiesComp[CollectIndexes[i]];
-	SearchComp::showInfo();
+	std::cout << *this;
 	char ch;
 	std::cout << "Желаете сохранить результаты поиска в файл?(y/n)\n";
 	std::cin >> ch;

@@ -22,22 +22,22 @@ void workComputers::testCopyOperator(){
 		std::cout << "второй объект присваиваем первому:\n";
 		eg = eg2;
 		std::cout << "вывод второго объекта:\n";
-		eg2.showInfo();
+		std::cout << eg2;
 	}
 	std::cout << "очистка второго объекта\n";
 	eg = *this;
 	std::cout << "вывод первого объекта:\n";
-	eg.showInfo();
+	std::cout << eg;
 }
 
 void workComputers::testCopyConstructor(){
 	workComputers eg(*this);
 	std::cout << "вывод первого объекта:\n";
-	eg.showInfo();
+	std::cout << eg;
 	std::cout << "создаем второй объект, с помощью конструтора:\n";
 	workComputers eg2(eg);
 	std::cout << "вывод второго объекта:\n";
-	eg2.showInfo();
+	std::cout << eg2;
 }
 
 void workComputers::InputFromFile(){
@@ -120,7 +120,7 @@ void workComputers::Delete_comp(){
 	}
 	int n;
 	char ch;
-	workComputers::showInfo();
+	std::cout << *this;
 	std::cout << "Введите номер строки для удаления: ";
 	std::cin >> n;
 	if (n < 1 || n > size){
@@ -145,20 +145,6 @@ void workComputers::Delete_comp(){
 	}
 }
 
-void workComputers::showInfo(){
-	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
-	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
-             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
-	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
-	             std::setw(129) << "\n"; 
-	for (int i = 0; i < size; i++){
-		std::cout << std::setfill(' ') <<
-		       	"|" << std::setw(5) << i + 1 << "|" 
-			<< CapabilitiesComp[i];
-			std::cout << std::setfill('-') << std::setw(129) << "\n"; 
-	}
-}
-
 void workComputers::swapElementsInMassive(unsigned index){
 	RECORD temp = CapabilitiesComp[index];
 	CapabilitiesComp[index] = CapabilitiesComp[index - 1];
@@ -180,7 +166,7 @@ void workComputers::SortProcTypeAndClock(){
 		}
 		n--;
 	} while (flag);
-	workComputers::showInfo();
+	std::cout << *this;
 }
 
 void workComputers::SortProcName(){
@@ -199,7 +185,7 @@ void workComputers::SortProcName(){
 		}
 		n--;
 	} while (flag);
-	workComputers::showInfo();
+	std::cout << *this;
 }
 
 void workComputers::SortPrice(){
@@ -217,5 +203,5 @@ void workComputers::SortPrice(){
 		}
 		n--;
 	} while(flag);
-	workComputers::showInfo();
+	std::cout << *this;
 }

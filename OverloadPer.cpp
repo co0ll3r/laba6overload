@@ -26,6 +26,13 @@ std::ofstream& operator<<(std::ofstream& out, VideocardsPerech a){
 	return out;
 }
 
+std::ostream& operator<<(std::ostream& out, Perechen a)  // перегрузка вывода меню
+{
+
+
+	return out;
+}
+
 // перегрузка сравнений 1 перечен
 bool operator<(BrandPerech& a, BrandPerech& b){
 	return a.ProcName < b.ProcName;

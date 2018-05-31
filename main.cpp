@@ -2,8 +2,9 @@
 
 void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 	int SwitchChoose = 1;
-	std::cout << "\033c"; // clear terminal
-	//system("clear");
+	std::ifstream fin;
+	std::ofstream fout;
+	std::cout << "\033c"; // clear console 
 	std::cout << "1. Загрузка файла\n2. Сохранение результатов обработки в файл\n" <<
 		     "3. Добавление записи\n4. Удаление записи\n" <<
 		     "5. Вывод на экран\n6. Сортировка по типу процессора и тактовой частоте\n" <<
@@ -18,18 +19,17 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 		     "23. Сохранение результатов поиска\n24. Тестирование конструктора копирования для 1 класса\n"<< 
 		     "25. Тестирование оператора присваивания для 1 класса\n26. Тестирование конструктора копирования для 2 класса\n" << 
 		     "27. Тестирование оператора присваивания для 2 класса\n28. Тестирование конструктора копирования для 3 класса\n" << 
-		     "29. Тестирование оператора присваивания для 3 класса\n";
-
+		     "29. Тестирование оператора присваивания для 3 класса\n30. Вывод результатов поиска\n";
 	while (SwitchChoose == 1){
 		std::cout << "Введите пункт меню: ";
 		std::cin >> SwitchChoose;
 		std::cout << "\n";
 		switch(SwitchChoose){
 			case 1: ExampleComputer.InputFromFile(); break;
-			case 2: ExampleComputer.workComputers::OutputInFile(); break;
+			case 2: fout << (workComputers) ExampleComputer; break; //перегруженный вывод таблицы в файл
 			case 3: ExampleComputer.Add_comp(); break;
 			case 4: ExampleComputer.Delete_comp(); break;
-			case 5: ExampleComputer.workComputers::showInfo(); break;
+			case 5: std::cout << (workComputers)ExampleComputer; break; // перегруженный вывод таблицы на экран
 			case 6: ExampleComputer.workComputers::SortProcTypeAndClock(); break;
 			case 7: ExampleComputer.workComputers::SortProcName(); break; 	
 			case 8:	ExampleComputer.SortPrice(); break;
@@ -43,14 +43,13 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 			case 16: ExampleComputer.sortCountSecondPerech();break; 
 			case 17: ExampleComputer.sortVideoVolumeThirdPerech(); break; 
 			case 18: {
-					 std::cout << "1. Сохранить 1\n 2. Сохранить 2\n3. Сохранить 3\n";/*4. Сохранить все в одном файле;\n"*/
+					 std::cout << "1. Сохранить 1\n 2. Сохранить 2\n3. Сохранить 3\n";
 					 int j;
 					 std::cin >> j;
 					 switch(j){
 						 case 1: ExampleComputer.saveFirstPerech(); break;
 						 case 2: ExampleComputer.saveSecondPerech(); break;
 						 case 3: ExampleComputer.saveThirdPerech(); break;
-//						 case 4: saveAllPerech(ExampleComputer); break;
 						 default: break;
 					 }
 					 break;
@@ -76,6 +75,7 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 		case 27: ExampleComputer.SearchComp::testCopyOperator(); break;
 		case 28: ExampleComputer.Perechen::testCopyConstructor(); break;
 		case 29: ExampleComputer.Perechen::testCopyOperator(); break;
+		case 30: std::cout << (SearchComp) ExampleComputer; break;
 		default: exitFlag =false; break;
 	}
 	std::cout << "\nВведите 1 для повторного выбора пункта меню(без очистки экрана): ";

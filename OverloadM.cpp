@@ -65,7 +65,6 @@ std::ofstream& operator<<(std::ofstream& out, RECORD a){
 	return out;
 }
 
-
 // ПЕРЕГРУЗКИ операторов сравнения
 bool operator<(COMP& a, COMP& b){
 	if (a.ProcType< b.ProcType)
@@ -87,3 +86,85 @@ bool operator<(RECORD& a, RECORD& b){
 		return true;
 	return false;
 }
+std::istream& operator>>(std::istream& in, workComputers& a){
+
+	return in;
+}
+std::ostream& operator<<(std::ostream& out, workComputers a){
+	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
+	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
+             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
+	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
+	             std::setw(129) << "\n"; 
+	for (int i = 0; i < a.size; i++){
+		std::cout << std::setfill(' ') <<
+		       	"|" << std::setw(5) << i + 1 << "|" 
+			<< a.CapabilitiesComp[i];
+			std::cout << std::setfill('-') << std::setw(129) << "\n"; 
+	}
+	return out;
+}
+std::ifstream& operator>>(std::ifstream& in, workComputers& a){
+	std::string file;
+	std::cout << "Введите имя файла для чтения\n";
+	std::cin >> file;
+	in.open(file);
+	if (in.fail()){
+		std::cout << file << " не удалось создать файл\n";
+		return in;
+	}
+	RECORD ab;	
+	RECORD* CopyCapComp;
+	int i = -1;
+	char end = '1';
+	while(end != '\0'){
+		if (in.fail()) 
+			break;
+		i++;
+		in >> ab >> end;
+		CopyCapComp = new RECORD[i + 1];
+		for (int j = 0; j < i; j++)
+			if (a.CapabilitiesComp != NULL)
+				CopyCapComp[j] = a.CapabilitiesComp[j];
+		CopyCapComp[i] = ab;
+		if (a.CapabilitiesComp != NULL)
+			delete [] a.CapabilitiesComp;
+		a.CapabilitiesComp = CopyCapComp;
+		CopyCapComp = NULL;
+	}
+	a.size = ++i;
+	return in;
+}
+std::ofstream& operator<<(std::ofstream& out, workComputers a){
+
+	return out;
+}
+
+// Перегрузка ПОИСКА
+std::istream& operator>>(std::istream& in, SearchComp& a){
+
+	return in;
+}
+std::ostream& operator<<(std::ostream& out, SearchComp a){
+	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
+	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
+             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
+	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
+	             std::setw(129) << "\n"; 
+	for (int i = 0; i < a.size; i++){
+		std::cout << std::setfill(' ') << "|" << std::setw(5)
+		       	<< i + 1 << "|" << a.SearchResult[i];
+		std::cout << std::setfill('-') << std::setw(129) << "\n"; 
+	}
+
+	return out;
+}
+std::ifstream& operator>>(std::ifstream& in, SearchComp& a){
+	
+	return in;
+}
+std::ofstream& operator<<(std::ofstream& out, SearchComp a){
+
+	return out;
+}
+
