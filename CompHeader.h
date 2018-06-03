@@ -108,7 +108,7 @@ class workComputers {
 
 		/* overloads*/
 		workComputers& operator=(workComputers);
-		friend std::istream& operator>>(std::istream&, workComputers&);
+		friend std::istream& operator>>(std::istream& in, workComputers& a);
 		friend std::ostream& operator<<(std::ostream&, workComputers);
 		friend std::ifstream& operator>>(std::ifstream&, workComputers&);
 		friend std::ofstream& operator<<(std::ofstream&, workComputers);
@@ -120,7 +120,7 @@ class workComputers {
 
 		void InputFromFile();
 		virtual void OutputInFile();
-		void Add_comp();
+//		void Add_comp();
 		void Delete_comp();
 		// 	virtual	void showInfo();
 		void swapElementsInMassive(unsigned);
@@ -147,10 +147,11 @@ class SearchComp : public workComputers{
 
 		/* overloads*/
 		SearchComp& operator=(SearchComp);
-		friend std::istream& operator>>(std::istream&, SearchComp&);
+//		friend std::istream& operator>>(std::istream&, SearchComp&);
 		friend std::ostream& operator<<(std::ostream&, SearchComp);
-		friend std::ifstream& operator>>(std::ifstream&, SearchComp&);
+/*		friend std::ifstream& operator>>(std::ifstream&, SearchComp&);
 		friend std::ofstream& operator<<(std::ofstream&, SearchComp);
+		*/
 
 		/* METHODS */
 		virtual void testCopyConstructor();
@@ -179,6 +180,7 @@ class Perechen : public SearchComp{
 
 		/*overloads*/
 		Perechen& operator=(Perechen); 
+//		friend std::ifstream& operator>>(std::ifstream& in, Perechen& a);
 		friend std::ostream& operator<<(std::ostream&, Perechen); // перегрузка вывода меню
 		
 		/* Methods */

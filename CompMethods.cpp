@@ -40,36 +40,37 @@ void workComputers::testCopyConstructor(){
 	std::cout << eg2;
 }
 
+
 void workComputers::InputFromFile(){
-	std::string file;
-	std::cout << "Введите имя файла для чтения\n";
-	std::cin >> file;
-	std::ifstream fin;
-	fin.open(file);
-	if (fin.fail()){
-		std::cout << file << " не удалось создать файл\n";
-		return;
-	}
-	RECORD ab;	
-	RECORD* CopyCapComp;
-	int i = -1;
-	char end = '1';
-	while(end != '\0'){
-		if (fin.fail()) 
-			break;
-		i++;
-		fin >> ab >> end;
-		CopyCapComp = new RECORD[i + 1];
-		for (int j = 0; j < i; j++)
-			if (CapabilitiesComp != NULL)
-				CopyCapComp[j] = CapabilitiesComp[j];
-		CopyCapComp[i] = ab;
-		if (CapabilitiesComp != NULL)
-			delete [] CapabilitiesComp;
-		CapabilitiesComp = CopyCapComp;
-		CopyCapComp = NULL;
-	}
-	size = ++i;
+       std::string file;
+       std::cout << "Введите имя файла для чтения\n";
+       std::cin >> file;
+       std::ifstream fin;
+       fin.open(file);
+       if (fin.fail()){
+               std::cout << file << " не удалось создать файл\n";
+               return;
+       }
+       RECORD ab;      
+       RECORD* CopyCapComp;
+       int i = -1;
+       char end = '1';
+       while(end != '\0'){
+               if (fin.fail()) 
+                       break;
+               i++;
+               fin >> ab >> end;
+               CopyCapComp = new RECORD[i + 1];
+               for (int j = 0; j < i; j++)
+                       if (CapabilitiesComp != NULL)
+                               CopyCapComp[j] = CapabilitiesComp[j];
+               CopyCapComp[i] = ab;
+               if (CapabilitiesComp != NULL)
+                       delete [] CapabilitiesComp;
+               CapabilitiesComp = CopyCapComp;
+               CopyCapComp = NULL;
+       }
+       size = ++i;
 }
 
 void workComputers::OutputInFile(){
@@ -92,24 +93,6 @@ void workComputers::OutputInFile(){
  		fout << CapabilitiesComp[i];
 		fout << std::setfill('-') << std::setw(129) << "\n"; 
 	}
-}
-
-void workComputers::Add_comp(){
-	RECORD* CopyCapComp = new RECORD[size + 1];
-	if (CopyCapComp == NULL)
-	{
-		std::cout << "Ошибка выделения памяти при добавлении компьютера!\n";
-		return;//exit(-1);
-	}
-	for (int j = 0; j < size; j++)
-		if (CapabilitiesComp != NULL)
-			CopyCapComp[j] = CapabilitiesComp[j];
-	std::cin >> CopyCapComp[size];
-	if (CapabilitiesComp != NULL)
-		delete [] CapabilitiesComp;
-	CapabilitiesComp = CopyCapComp;
-	size++;
-	CopyCapComp = NULL;
 }
 
 void workComputers::Delete_comp(){

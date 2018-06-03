@@ -2,7 +2,7 @@
 
 void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 	int SwitchChoose = 1;
-	std::ifstream fin;
+	std::ifstream finp;
 	std::ofstream fout;
 	std::cout << "\033c"; // clear console 
 	std::cout << "1. Загрузка файла\n2. Сохранение результатов обработки в файл\n" <<
@@ -25,9 +25,9 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 		std::cin >> SwitchChoose;
 		std::cout << "\n";
 		switch(SwitchChoose){
-			case 1: ExampleComputer.InputFromFile(); break;
+			case 1:/* finp >> (workComputers) ExampleComputer*/ ExampleComputer.InputFromFile(); break; //перегруженный ввод таблицы из файла
 			case 2: fout << (workComputers) ExampleComputer; break; //перегруженный вывод таблицы в файл
-			case 3: ExampleComputer.Add_comp(); break;
+			case 3: std::cin >> (workComputers) ExampleComputer; break;
 			case 4: ExampleComputer.Delete_comp(); break;
 			case 5: std::cout << (workComputers)ExampleComputer; break; // перегруженный вывод таблицы на экран
 			case 6: ExampleComputer.workComputers::SortProcTypeAndClock(); break;
@@ -54,9 +54,7 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 					 }
 					 break;
 			}
-				 
 			case 19: ExampleComputer.SearchPrice(); break;
-				 
 			case 20: ExampleComputer.SearchHddVolume(); break;
 			case 21: ExampleComputer.SearchBrandTypeRamETC(); break;
 			case 22:{

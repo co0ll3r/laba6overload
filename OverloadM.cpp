@@ -87,9 +87,25 @@ bool operator<(RECORD& a, RECORD& b){
 	return false;
 }
 std::istream& operator>>(std::istream& in, workComputers& a){
-
+	RECORD* CopyCapComp = new RECORD[a.size + 1];
+	if (CopyCapComp == NULL)
+	{
+		std::cout << "Ошибка выделения памяти при добавлении компьютера!\n";
+		return in;//exit(-1);
+	}
+	for (int j = 0; j < a.size; j++)
+		if (a.CapabilitiesComp != NULL)
+			CopyCapComp[j] = a.CapabilitiesComp[j];
+		in >> CopyCapComp[a.size];
+	if (a.CapabilitiesComp != NULL)
+		delete [] a.CapabilitiesComp;
+	a.CapabilitiesComp = CopyCapComp;
+	a.size++;
+	CopyCapComp = NULL;
 	return in;
 }
+
+
 std::ostream& operator<<(std::ostream& out, workComputers a){
 	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
 	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
@@ -135,16 +151,15 @@ std::ifstream& operator>>(std::ifstream& in, workComputers& a){
 	a.size = ++i;
 	return in;
 }
-std::ofstream& operator<<(std::ofstream& out, workComputers a){
+/*std::ofstream& operator<<(std::ofstream& out, workComputers a){
 
 	return out;
 }
 
 // Перегрузка ПОИСКА
 std::istream& operator>>(std::istream& in, SearchComp& a){
-
 	return in;
-}
+}*/
 std::ostream& operator<<(std::ostream& out, SearchComp a){
 	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
 	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
@@ -159,6 +174,7 @@ std::ostream& operator<<(std::ostream& out, SearchComp a){
 
 	return out;
 }
+/*
 std::ifstream& operator>>(std::ifstream& in, SearchComp& a){
 	
 	return in;
@@ -167,4 +183,4 @@ std::ofstream& operator<<(std::ofstream& out, SearchComp a){
 
 	return out;
 }
-
+*/
