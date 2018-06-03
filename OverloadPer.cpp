@@ -27,9 +27,28 @@ std::ofstream& operator<<(std::ofstream& out, VideocardsPerech a){
 }
 
 std::ostream& operator<<(std::ostream& out, Perechen a)  // перегрузка вывода меню
-{
-
-
+{	
+	out << std::setfill('-') << std::setw(57) << '\n' <<
+		"|     Название процессора     | Количество компьютеров |\n" << 
+		std::setw(57) << '\n';
+	out << std::setfill(' ');
+	for (int i = 0; i < a.pBrandlen; i++)
+		out << a.perechenBrands[i];// перегруженный вывод перечня
+	out << '\n';
+	out << std::setfill('-') << std::setw(52) << '\n' <<
+		"|     Тип процессора     | Количество компьютеров |\n" << 
+		std::setw(52) << '\n';
+	out << std::setfill(' ');
+	for (int i = 0; i < a.pProclen; i++)
+		out << a.perechenProcTypes[i];// перегруженный вывод перечня
+	out << '\n';
+	out << std::setfill('-') << std::setw(55) << '\n' <<
+		"|     Объём видеопамяти     | Количество компьютеров |\n" << 
+		std::setw(55) << '\n';
+	out << std::setfill(' ');
+	for (int i = 0; i < a.pVideolen; i++)
+		out << a.perechenVideocardVolume[i];// перегруженный вывод перечня
+	out << '\n';
 	return out;
 }
 

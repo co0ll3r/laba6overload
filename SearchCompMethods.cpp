@@ -59,21 +59,6 @@ void SearchComp::OutputInFile(){
 	}
 }
 
-/*
-void SearchComp::showInfo(){
-	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
-	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
-             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
-	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
-	             std::setw(129) << "\n"; 
-	for (int i = 0; i < size; i++){
-		std::cout << std::setfill(' ') << "|" << std::setw(5)
-		       	<< i + 1 << "|" << SearchResult[i];
-		std::cout << std::setfill('-') << std::setw(129) << "\n"; 
-	}
-}
-*/
-
 void SearchComp::swapElementsInSearch(unsigned index){
 	RECORD temp = SearchResult[index];
 	SearchResult[index] = SearchResult[index - 1];
@@ -127,14 +112,12 @@ void SearchComp::SearchPrice(){
 	std::cin >> BottomBorder;
 	std::cout << "Введите верхнюю границу цены(нестрогое): ";
 	std::cin >> TopBorder;
-//	SearchComp SearchResult;
 	std::vector<int> CollectIndexes; // Второй вариант со сбором индеков
 	for (int i = 0; i < workComputers::size; i++)
 	{
 		if (BottomBorder <= CapabilitiesComp[i].CompCost && CapabilitiesComp[i].CompCost <= TopBorder)
 		{
 			CollectIndexes.push_back(i);
-	//		std::cout << "i= " << i << "\n";
 		}	
 	}
 	// Есть два варианта: 1) вектор собирающий индексы; 2) перераспределение памяти каждыый раз

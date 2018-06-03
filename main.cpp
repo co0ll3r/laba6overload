@@ -2,7 +2,7 @@
 
 void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 	int SwitchChoose = 1;
-	std::ifstream finp;
+	std::ifstream fin;
 	std::ofstream fout;
 	std::cout << "\033c"; // clear console 
 	std::cout << "1. Загрузка файла\n2. Сохранение результатов обработки в файл\n" <<
@@ -19,21 +19,21 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 		     "23. Сохранение результатов поиска\n24. Тестирование конструктора копирования для 1 класса\n"<< 
 		     "25. Тестирование оператора присваивания для 1 класса\n26. Тестирование конструктора копирования для 2 класса\n" << 
 		     "27. Тестирование оператора присваивания для 2 класса\n28. Тестирование конструктора копирования для 3 класса\n" << 
-		     "29. Тестирование оператора присваивания для 3 класса\n30. Вывод результатов поиска\n";
+		     "29. Тестирование оператора присваивания для 3 класса\n30. Вывод результатов поиска\n31. Вывод перечней\n";
 	while (SwitchChoose == 1){
 		std::cout << "Введите пункт меню: ";
 		std::cin >> SwitchChoose;
 		std::cout << "\n";
 		switch(SwitchChoose){
-			case 1:/* finp >> (workComputers) ExampleComputer*/ ExampleComputer.InputFromFile(); break; //перегруженный ввод таблицы из файла
-			case 2: fout << (workComputers) ExampleComputer; break; //перегруженный вывод таблицы в файл
-			case 3: std::cin >> (workComputers) ExampleComputer; break;
-			case 4: ExampleComputer.Delete_comp(); break;
-			case 5: std::cout << (workComputers)ExampleComputer; break; // перегруженный вывод таблицы на экран
-			case 6: ExampleComputer.workComputers::SortProcTypeAndClock(); break;
-			case 7: ExampleComputer.workComputers::SortProcName(); break; 	
-			case 8:	ExampleComputer.SortPrice(); break;
-			case 9: ExampleComputer.showFirstPerech(); break;
+			case 1:  fin >> (workComputers&) ExampleComputer; break; //перегруженный ввод таблицы из файла
+			case 2:  fout << (workComputers) ExampleComputer; break; //перегруженный вывод таблицы в файл
+			case 3:  std::cin >> (workComputers&) ExampleComputer; break; // перегруженное ввод записи в таблицу
+			case 4:  ExampleComputer.Delete_comp(); break;
+			case 5:  std::cout << (workComputers)ExampleComputer; break; // перегруженный вывод таблицы на экран
+			case 6:  ExampleComputer.workComputers::SortProcTypeAndClock(); break;
+			case 7:  ExampleComputer.workComputers::SortProcName(); break; 	
+			case 8:	 ExampleComputer.SortPrice(); break;
+			case 9:  ExampleComputer.showFirstPerech(); break;
 			case 10: ExampleComputer.showSecondPerech(); break; 
 			case 11: ExampleComputer.showThirdPerech();break; 
 			case 12: makePerechen1(ExampleComputer, ExampleComputer); break; 
@@ -53,7 +53,7 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 						 default: break;
 					 }
 					 break;
-			}
+				 }
 			case 19: ExampleComputer.SearchPrice(); break;
 			case 20: ExampleComputer.SearchHddVolume(); break;
 			case 21: ExampleComputer.SearchBrandTypeRamETC(); break;
@@ -66,20 +66,20 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 						case 2: ExampleComputer.SearchComp::SortRAM(); break;
 					}
 				}; break;
-		case 23: ExampleComputer.SearchComp::OutputInFile(); break;
-		case 24: ExampleComputer.workComputers::testCopyConstructor(); break;
-		case 25: ExampleComputer.workComputers::testCopyOperator(); break;
-		case 26: ExampleComputer.SearchComp::testCopyConstructor(); break;
-		case 27: ExampleComputer.SearchComp::testCopyOperator(); break;
-		case 28: ExampleComputer.Perechen::testCopyConstructor(); break;
-		case 29: ExampleComputer.Perechen::testCopyOperator(); break;
-		case 30: std::cout << (SearchComp) ExampleComputer; break;
-		default: exitFlag =false; break;
+			case 23: fout << (SearchComp) ExampleComputer; break; // перегруженный вывод результатов поиска в файл
+			case 24: ExampleComputer.workComputers::testCopyConstructor(); break;
+			case 25: ExampleComputer.workComputers::testCopyOperator(); break;
+			case 26: ExampleComputer.SearchComp::testCopyConstructor(); break;
+			case 27: ExampleComputer.SearchComp::testCopyOperator(); break;
+			case 28: ExampleComputer.Perechen::testCopyConstructor(); break;
+			case 29: ExampleComputer.Perechen::testCopyOperator(); break;
+			case 30: std::cout << (SearchComp) ExampleComputer; break; // перегруженный вывод результатов поиска
+			case 31: std::cout << ExampleComputer; break; // перегруженный вывод всех перечней
+			default: exitFlag =false; break;
+		}
+		std::cout << "\nВведите 1 для повторного выбора пункта меню(без очистки экрана): ";
+		std::cin >> SwitchChoose;  
 	}
-	std::cout << "\nВведите 1 для повторного выбора пункта меню(без очистки экрана): ";
-	std::cin >> SwitchChoose; // 
-}
-
 }
 
 int main()

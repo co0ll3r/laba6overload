@@ -73,6 +73,24 @@ void workComputers::InputFromFile(){
        size = ++i;
 }
 
+void workComputers::Add_comp(){
+	RECORD* CopyCapComp = new RECORD[size + 1];
+	if (CopyCapComp == NULL)
+	{
+		std::cout << "Ошибка выделения памяти при добавлении компьютера!\n";
+		return;//exit(-1);
+	}
+	for (int j = 0; j < size; j++)
+		if (CapabilitiesComp != NULL)
+			CopyCapComp[j] = CapabilitiesComp[j];
+	std::cin >> CopyCapComp[size];
+	if (CapabilitiesComp != NULL)
+		delete [] CapabilitiesComp;
+	CapabilitiesComp = CopyCapComp;
+	size++;
+	CopyCapComp = NULL;
+}
+
 void workComputers::OutputInFile(){
 	std::string file;
 	std::cout << "Введите имя файла для сохранения\n";

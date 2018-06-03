@@ -120,9 +120,8 @@ class workComputers {
 
 		void InputFromFile();
 		virtual void OutputInFile();
-//		void Add_comp();
+		void Add_comp();
 		void Delete_comp();
-		// 	virtual	void showInfo();
 		void swapElementsInMassive(unsigned);
 		virtual	void SortProcTypeAndClock();
 		void SortProcName();
@@ -147,11 +146,8 @@ class SearchComp : public workComputers{
 
 		/* overloads*/
 		SearchComp& operator=(SearchComp);
-//		friend std::istream& operator>>(std::istream&, SearchComp&);
 		friend std::ostream& operator<<(std::ostream&, SearchComp);
-/*		friend std::ifstream& operator>>(std::ifstream&, SearchComp&);
 		friend std::ofstream& operator<<(std::ofstream&, SearchComp);
-		*/
 
 		/* METHODS */
 		virtual void testCopyConstructor();
@@ -163,7 +159,6 @@ class SearchComp : public workComputers{
 		void SortRAM();
 		virtual void OutputInFile();
 		virtual void SortProcTypeAndClock();
-//		virtual void showInfo();
 		void swapElementsInSearch(unsigned);
 	/*class fields */
 	private:

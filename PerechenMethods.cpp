@@ -28,30 +28,18 @@ void Perechen::testCopyOperator(){
 	if (true){
 		Perechen eg;
 		eg = *this;
-		std::cout << "вывод первого объекта:\n";
-		eg.showFirstPerech();
-		eg.showSecondPerech();
-		eg.showThirdPerech();
-		std::cout << "копирование объекта через оператор присваивания\n";
+		std::cout << "вывод первого объекта:\n" << eg 
+		<< "копирование объекта через оператор присваивания\n";
 		eg2 = eg;
 	}
-	std::cout << "Очистка первого объекта.\nвывод второго объекта:\n";
-	eg2.showFirstPerech();
-	eg2.showSecondPerech();
-	eg2.showThirdPerech();
+	std::cout << "Очистка первого объекта.\nвывод второго объекта:\n" << eg2;
 };
 void Perechen::testCopyConstructor(){
 	Perechen eg(*this);
-	std::cout << "вывод первого объекта:\n";
-	eg.showFirstPerech();
-	eg.showSecondPerech();
-	eg.showThirdPerech();
-	std::cout << "Копирование первого объекта через конструктор:\n";
+	std::cout << "вывод первого объекта:\n" << eg 
+	<< "Копирование первого объекта через конструктор:\n";
 	Perechen eg2(eg);
-	std::cout << "вывод второго объекта:\n";
-	eg2.showFirstPerech();
-	eg2.showSecondPerech();
-	eg2.showThirdPerech();
+	std::cout << "вывод второго объекта:\n" << eg2;
 }
 void Perechen::showFirstPerech(){
 	std::cout << std::setfill('-') << std::setw(57) << '\n' <<
@@ -59,7 +47,7 @@ void Perechen::showFirstPerech(){
 		std::setw(57) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pBrandlen; i++)
-		std::cout << perechenBrands[i];
+		std::cout << perechenBrands[i];// перегруженный вывод перечня
 	std::cout << '\n';
 }
 
@@ -69,7 +57,7 @@ void Perechen::showSecondPerech(){
 		std::setw(52) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pProclen; i++)
-		std::cout << perechenProcTypes[i];
+		std::cout << perechenProcTypes[i];// перегруженный вывод перечня
 	std::cout << '\n';
 }
 
@@ -79,7 +67,7 @@ void Perechen::showThirdPerech(){
 		std::setw(55) << '\n';
 	std::cout << std::setfill(' ');
 	for (int i = 0; i < pVideolen; i++)
-		std::cout << perechenVideocardVolume[i];
+		std::cout << perechenVideocardVolume[i];// перегруженный вывод перечня
 	std::cout << '\n';
 }
 

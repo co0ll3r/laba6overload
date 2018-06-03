@@ -86,6 +86,7 @@ bool operator<(RECORD& a, RECORD& b){
 		return true;
 	return false;
 }
+
 std::istream& operator>>(std::istream& in, workComputers& a){
 	RECORD* CopyCapComp = new RECORD[a.size + 1];
 	if (CopyCapComp == NULL)
@@ -104,7 +105,6 @@ std::istream& operator>>(std::istream& in, workComputers& a){
 	CopyCapComp = NULL;
 	return in;
 }
-
 
 std::ostream& operator<<(std::ostream& out, workComputers a){
 	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
@@ -151,15 +151,28 @@ std::ifstream& operator>>(std::ifstream& in, workComputers& a){
 	a.size = ++i;
 	return in;
 }
-/*std::ofstream& operator<<(std::ofstream& out, workComputers a){
-
+std::ofstream& operator<<(std::ofstream& out, workComputers a){
+	std::string file;
+	std::cout << "Введите имя файла для сохранения\n";
+	std::cin >> file;
+	out.open(file);
+	if (out.fail()){
+		std::cout << file << " не удалось открыть файл\n";
+		return out;
+	}
+	out << std::setfill('-') << std::setw(129) << "\n" <<
+	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
+             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
+	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
+	             std::setw(129) << "\n"; 
+	for (int i = 0; i < a.size; i++){
+		out << std::setfill(' ') << "|" << std::setw(5) << i + 1 << "|";
+ 		out << a.CapabilitiesComp[i]; // перегруженный вывод в файл
+		out << std::setfill('-') << std::setw(129) << "\n"; 
+	}
 	return out;
 }
-
 // Перегрузка ПОИСКА
-std::istream& operator>>(std::istream& in, SearchComp& a){
-	return in;
-}*/
 std::ostream& operator<<(std::ostream& out, SearchComp a){
 	std::cout << std::setfill('-') << std::setw(129) << "\n" <<
 	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
@@ -174,13 +187,25 @@ std::ostream& operator<<(std::ostream& out, SearchComp a){
 
 	return out;
 }
-/*
-std::ifstream& operator>>(std::ifstream& in, SearchComp& a){
-	
-	return in;
-}
 std::ofstream& operator<<(std::ofstream& out, SearchComp a){
-
+	std::string file;
+	std::cout << "Введите имя файла для сохранения\n";
+	std::cin >> file;
+	out.open(file);
+	if (out.fail()){
+		std::cout << file << " не удалось открыть файл\n";
+		return out;
+	}
+	out << std::setfill('-') << std::setw(129) << "\n" <<
+	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
+             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
+	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
+	             std::setw(129) << "\n"; 
+	for (int i = 0; i < a.size; i++){
+		out << std::setfill(' ') <<
+		   "|" << std::setw(5) << i + 1 << "|";
+	        out << a.SearchResult[i];
+		out << std::setfill('-') << std::setw(129) << "\n"; 
+	}
 	return out;
 }
-*/
