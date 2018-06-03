@@ -118,8 +118,8 @@ class workComputers {
 		virtual void testCopyOperator();
 		virtual void testCopyConstructor();
 
-		void InputFromFile();
-		virtual void OutputInFile();
+//		void InputFromFile();
+//		virtual void OutputInFile();
 		void Add_comp();
 		void Delete_comp();
 		void swapElementsInMassive(unsigned);
@@ -175,8 +175,7 @@ class Perechen : public SearchComp{
 
 		/*overloads*/
 		Perechen& operator=(Perechen); 
-//		friend std::ifstream& operator>>(std::ifstream& in, Perechen& a);
-		friend std::ostream& operator<<(std::ostream&, Perechen); // перегрузка вывода меню
+		friend std::ostream& operator<<(std::ostream&, Perechen); // перегрузка вывода всех перечней
 		
 		/* Methods */
 		friend void swap(Perechen&, Perechen&);

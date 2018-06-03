@@ -40,39 +40,6 @@ void workComputers::testCopyConstructor(){
 	std::cout << eg2;
 }
 
-
-void workComputers::InputFromFile(){
-       std::string file;
-       std::cout << "Введите имя файла для чтения\n";
-       std::cin >> file;
-       std::ifstream fin;
-       fin.open(file);
-       if (fin.fail()){
-               std::cout << file << " не удалось создать файл\n";
-               return;
-       }
-       RECORD ab;      
-       RECORD* CopyCapComp;
-       int i = -1;
-       char end = '1';
-       while(end != '\0'){
-               if (fin.fail()) 
-                       break;
-               i++;
-               fin >> ab >> end;
-               CopyCapComp = new RECORD[i + 1];
-               for (int j = 0; j < i; j++)
-                       if (CapabilitiesComp != NULL)
-                               CopyCapComp[j] = CapabilitiesComp[j];
-               CopyCapComp[i] = ab;
-               if (CapabilitiesComp != NULL)
-                       delete [] CapabilitiesComp;
-               CapabilitiesComp = CopyCapComp;
-               CopyCapComp = NULL;
-       }
-       size = ++i;
-}
-
 void workComputers::Add_comp(){
 	RECORD* CopyCapComp = new RECORD[size + 1];
 	if (CopyCapComp == NULL)
@@ -89,28 +56,6 @@ void workComputers::Add_comp(){
 	CapabilitiesComp = CopyCapComp;
 	size++;
 	CopyCapComp = NULL;
-}
-
-void workComputers::OutputInFile(){
-	std::string file;
-	std::cout << "Введите имя файла для сохранения\n";
-	std::cin >> file;
-	std::ofstream fout;
-	fout.open(file);
-	if (fout.fail()){
-		std::cout << file << " не удалось открыть файл\n";
-		return;
-	}
-	fout << std::setfill('-') << std::setw(129) << "\n" <<
-	     "|Номер| Цена | Кол. |                 Процессор                    |              Видеокарта           | ОЗУ | Размер жесткого |\n" <<
-             "|     |      |      |----------------------------------------------|-----------------------------------|     |                 |\n" << 
-	     "|     |(Руб.)|(штук)|    Название    |        Тип        | Частота |        Название        | Объём Гб |  Гб |      (Гб)       |\n" <<
-	             std::setw(129) << "\n"; 
-	for (int i = 0; i < size; i++){
-		fout << std::setfill(' ') << "|" << std::setw(5) << i + 1 << "|";
- 		fout << CapabilitiesComp[i];
-		fout << std::setfill('-') << std::setw(129) << "\n"; 
-	}
 }
 
 void workComputers::Delete_comp(){
