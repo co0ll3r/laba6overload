@@ -1,10 +1,14 @@
 #include "CompHeader.h"
 
 void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
+	workComputers& workComputer = ExampleComputer;
+	SearchComp& searchComputer = ExampleComputer;
+	workComputer = searchComputer;
 	int SwitchChoose = 1;
 	std::ifstream fin;
 	std::ofstream fout;
 	std::cout << "\033c"; // clear console 
+//	std::cout << &ExampleComputer << "\n" << &workComputer << "\n" << &searchComputer << "\n";
 	std::cout << "1. Загрузка файла\n2. Сохранение результатов обработки в файл\n" <<
 		     "3. Добавление записи\n4. Удаление записи\n" <<
 		     "5. Вывод на экран\n6. Сортировка по типу процессора и тактовой частоте\n" <<
@@ -22,7 +26,17 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 		     "29. Тестирование оператора присваивания для 3 класса\n30. Вывод результатов поиска\n31. Вывод перечней\n";
 	while (SwitchChoose == 1){
 		std::cout << "Введите пункт меню: ";
+		//try{
 		std::cin >> SwitchChoose;
+		/*
+		// Handle the error, that occurs when we input a char symbol
+		if (std::cin.fail())
+			throw Err("Обнаружена ошибка ввода! Возможно вы ввели строковый символ.\n");
+		}
+		catch (Err &e){
+			cin.clear();
+		}
+		*/
 		std::cout << "\n";
 		switch(SwitchChoose){
 			case 1:  fin >> (workComputers&) ExampleComputer; break; //перегруженный ввод таблицы из файла
@@ -30,9 +44,11 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 			case 3:  std::cin >> (workComputers&) ExampleComputer; break; // перегруженное ввод записи в таблицу
 			case 4:  ExampleComputer.Delete_comp(); break;
 			case 5:  std::cout << (workComputers)ExampleComputer; break; // перегруженный вывод таблицы на экран
-			case 6:  ExampleComputer.workComputers::SortProcTypeAndClock(); break;
-			case 7:  ExampleComputer.workComputers::SortProcName(); break; 	
-			case 8:	 ExampleComputer.SortPrice(); break;
+//			case 5:  std::cout << workComputer; break;			
+//			case 6:  ExampleComputer.workComputers::SortProcTypeAndClock(); break;
+			case 6:  workComputer.SortProcTypeAndClock(); break;
+			case 7:  workComputer.SortProcName(); break; 	
+			case 8:	 workComputer.SortPrice(); break;
 			case 9:  ExampleComputer.showFirstPerech(); break;
 			case 10: ExampleComputer.showSecondPerech(); break; 
 			case 11: ExampleComputer.showThirdPerech();break; 
@@ -67,8 +83,8 @@ void GetMenu(Perechen& ExampleComputer, bool& exitFlag){
 					}
 				}; break;
 			case 23: fout << (SearchComp) ExampleComputer; break; // перегруженный вывод результатов поиска в файл
-			case 24: ExampleComputer.workComputers::testCopyConstructor(); break;
-			case 25: ExampleComputer.workComputers::testCopyOperator(); break;
+			case 24: workComputer.testCopyConstructor(); break;
+			case 25: workComputer.testCopyOperator(); break;
 			case 26: ExampleComputer.SearchComp::testCopyConstructor(); break;
 			case 27: ExampleComputer.SearchComp::testCopyOperator(); break;
 			case 28: ExampleComputer.Perechen::testCopyConstructor(); break;

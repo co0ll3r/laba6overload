@@ -123,7 +123,7 @@ class workComputers {
 		void Add_comp();
 		void Delete_comp();
 		void swapElementsInMassive(unsigned);
-		virtual	void SortProcTypeAndClock();
+		void SortProcTypeAndClock();
 		void SortProcName();
 		void SortPrice();
 
