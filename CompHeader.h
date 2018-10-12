@@ -7,6 +7,8 @@
 #include <algorithm>
 #pragma once
 
+#include "Err.h" // class for try\catch
+
 class Perechen;
 class workComputers;
 class aggregate;
@@ -123,7 +125,7 @@ class workComputers {
 		void Add_comp();
 		void Delete_comp();
 		void swapElementsInMassive(unsigned);
-		void SortProcTypeAndClock();
+		virtual void SortProcTypeAndClock();
 		void SortProcName();
 		void SortPrice();
 
@@ -158,10 +160,10 @@ class SearchComp : public workComputers{
 		void SearchBrandTypeRamETC();
 		void SortRAM();
 		virtual void OutputInFile();
-		virtual void SortProcTypeAndClock();
+		void SortProcTypeAndClock();
 		void swapElementsInSearch(unsigned);
 	/*class fields */
-	private:
+	protected:
 		int size;
 		RECORD* SearchResult;
 };
@@ -196,7 +198,7 @@ class Perechen : public SearchComp{
 		friend void makePerechen2(workComputers, Perechen&);
 		friend void makePerechen3(workComputers, Perechen&);
 	/*class fields */
-	private:
+	protected:
 		int pBrandlen, pProclen, pVideolen;
 		BrandPerech* perechenBrands;
 		TypeProcPerech* perechenProcTypes;
